@@ -1,0 +1,10 @@
+[
+  {
+    "id": 1,
+    "issue": 1,
+    "date": "Aug 11, 2026",
+    "title": "Rhode Island Town Population Estimates 2024",
+    "description": "Population by town across the Ocean State. This data was pulled from the 2024 ACS 5-year survey.",
+    "embedUrl": "/patched_maps/RITownPopulation2024.html"
+  }
+]
