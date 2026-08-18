@@ -45,10 +45,18 @@ export default function Home() {
         {/* Map meta */}
         <div>
           <h2 className="text-xl font-semibold text-zinc-900">{map.title}</h2>
-          <p className="text-sm text-zinc-500 mt-0.5">{map.region}</p>
           <p className="text-sm text-zinc-600 mt-2 leading-relaxed">
             {map.description}
           </p>
+          {map.sources && map.sources.length > 0 && (
+            <ul className="mt-3 space-y-1">
+              {map.sources.map((source, i) => (
+                <li key={i} className="text-xs text-zinc-400 leading-relaxed">
+                  {source}
+                </li>
+              ))}
+            </ul>
+          )}
         </div>
 
         {/* Prev / Next */}

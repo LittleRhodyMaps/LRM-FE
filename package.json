@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "patch-maps": "node scripts/patch-maps.mjs"
+    "patch-maps": "node scripts/patch-maps.mjs",
+    "deploy": "next build && bash scripts/deploy.sh"
   },
   "dependencies": {
     "next": "16.3.0",

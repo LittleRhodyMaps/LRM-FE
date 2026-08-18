@@ -27,3 +27,15 @@ variable "default_root_object" {
   type        = string
   default     = "index.html"
 }
+
+variable "domain_name" {
+  description = "Apex domain to serve the site on, DNS hosted at Cloudflare"
+  type        = string
+  default     = "littlerhodymaps.com"
+}
+
+variable "subject_alternative_names" {
+  description = "Additional hostnames (besides domain_name) covered by the ACM cert and CloudFront aliases"
+  type        = list(string)
+  default     = ["www.littlerhodymaps.com"]
+}

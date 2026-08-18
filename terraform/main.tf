@@ -14,6 +14,14 @@ provider "aws" {
   profile = "dev"
 }
 
+# ACM certificates for CloudFront must live in us-east-1 regardless of
+# where everything else is deployed.
+provider "aws" {
+  alias   = "us_east_1"
+  region  = "us-east-1"
+  profile = "dev"
+}
+
 locals {
   bucket_name = "${var.project_name}-${var.environment}-site"
 }
@@ -49,6 +57,27 @@ resource "aws_s3_bucket_ownership_controls" "site" {
   }
 }
 
+# --- ACM certificate for the custom domain (must be in us-east-1 for CloudFront) ---
+
+resource "aws_acm_certificate" "site" {
+  provider                  = aws.us_east_1
+  domain_name               = var.domain_name
+  subject_alternative_names = var.subject_alternative_names
+  validation_method          = "DNS"
+
+  lifecycle {
+    create_before_destroy = true
+  }
+}
+
+# Terraform can't reach into Cloudflare's zone, so the validation CNAME(s)
+# from this cert must be added manually in the Cloudflare dashboard.
+# See the `acm_validation_records` output for the exact records.
+resource "aws_acm_certificate_validation" "site" {
+  provider        = aws.us_east_1
+  certificate_arn = aws_acm_certificate.site.arn
+}
+
 # --- CloudFront distribution with Origin Access Control ---
 
 resource "aws_cloudfront_origin_access_control" "site" {
@@ -64,6 +93,7 @@ resource "aws_cloudfront_distribution" "site" {
   default_root_object = var.default_root_object
   price_class         = var.cloudfront_price_class
   comment              = "${var.project_name} (${var.environment})"
+  aliases              = concat([var.domain_name], var.subject_alternative_names)
 
   origin {
     domain_name              = aws_s3_bucket.site.bucket_regional_domain_name
@@ -101,7 +131,9 @@ resource "aws_cloudfront_distribution" "site" {
   }
 
   viewer_certificate {
-    cloudfront_default_certificate = true
+    acm_certificate_arn      = aws_acm_certificate_validation.site.certificate_arn
+    ssl_support_method       = "sni-only"
+    minimum_protocol_version = "TLSv1.2_2021"
   }
 }
 
