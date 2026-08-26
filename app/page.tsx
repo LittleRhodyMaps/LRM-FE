@@ -2,10 +2,12 @@
 
 import { useState } from "react";
 import MAPS from "@/content/maps.json";
+import { MAP_REGISTRY } from "@/components/maps/registry";
 
 export default function Home() {
   const [index, setIndex] = useState(MAPS.length - 1);
   const map = MAPS[index];
+  const MapComponent = MAP_REGISTRY[map.component];
   const hasPrev = index > 0;
   const hasNext = index < MAPS.length - 1;
 
@@ -28,13 +30,8 @@ export default function Home() {
       {/* Map area */}
       <main className="w-full max-w-2xl px-6 mt-6 flex flex-col gap-5">
         <div className="w-full aspect-[4/3] bg-zinc-100 rounded-sm border border-zinc-200 overflow-hidden">
-          {map.embedUrl ? (
-            <iframe
-              key={map.id}
-              src={map.embedUrl}
-              title={map.title}
-              className="w-full h-full border-0"
-            />
+          {MapComponent ? (
+            <MapComponent key={map.id} />
           ) : (
             <div className="w-full h-full flex items-center justify-center text-zinc-400 text-sm">
               interactive map — {map.title}

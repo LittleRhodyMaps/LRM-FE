@@ -5,9 +5,18 @@
     "date": "Aug 11, 2026",
     "title": "Rhode Island Town Population Estimates 2024",
     "description": "The American Community Survey (ACS) is an ongoing U.S. Census Bureau project that releases yearly data on American life. It offers both 1-year and 5-year reports, with the 5-year version aggregating larger amounts of data for more accurate estimates. The data on this map comes directly from the 2024 5-year ACS.",
-    "embedUrl": "/patched_maps/RITownPopulation2024.html",
+    "component": "RITownPopulation2024",
     "sources": [
       "U.S. Census Bureau. (2024). 2020–2024 American Community Survey 5-Year Estimates. Retrieved from https://www.census.gov/programs-surveys/acs"
     ]
+  },
+  {
+    "id": 2,
+    "issue": 2,
+    "date": "Aug 12, 2026",
+    "title": "Rhode Island Background tiles",
+    "description": "Yada yada yada",
+    "component": "RIBackground",
+    "sources": []
   }
 ]
