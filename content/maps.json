@@ -13,10 +13,10 @@
   {
     "id": 2,
     "issue": 2,
-    "date": "Aug 12, 2026",
-    "title": "Rhode Island Background tiles",
-    "description": "Yada yada yada",
-    "component": "RIBackground",
-    "sources": []
+    "date": "Aug 28, 2026",
+    "title": "RI Population Estimates 2024 many census geography level",
+    "description": "",
+    "component": "RIAllGeosPopulation2024",
+    "sources": ["U.S. Census Bureau. (2024). 2020–2024 American Community Survey 5-Year Estimates. Retrieved from https://www.census.gov/programs-surveys/acs"]
   }
 ]

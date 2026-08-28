@@ -20,7 +20,8 @@ export async function addChoroplethLayer<P>(
   map: L.Map,
   geojsonUrl: string,
   { valueField, scale, styleOverrides, onFeatureHover, onFeatureReset }: ChoroplethLayerOptions<P>,
-  isCancelled: () => boolean
+  isCancelled: () => boolean,
+  layerGroup: L.LayerGroup | undefined = undefined
 ): Promise<L.GeoJSON | null> {
   const response = await fetch(geojsonUrl);
   const data = await response.json();
@@ -65,7 +66,9 @@ export async function addChoroplethLayer<P>(
     onEachFeature: (_feature, layer) => {
       layer.on({ mouseover: highlightFeature, mouseout: resetHighlight });
     },
-  }).addTo(map);
+  })
+
+  layerGroup?.addLayer(geojson)
 
   map.on("mouseout", () => {
     if (highlighted) {
@@ -74,6 +77,8 @@ export async function addChoroplethLayer<P>(
       onFeatureReset?.();
     }
   });
+
+
 
   return geojson;
 }

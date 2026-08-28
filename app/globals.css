@@ -35,6 +35,7 @@ body {
   border: none !important;
   transform: scale(clamp(0.5, calc(150cqw / 800px), 1));
   transform-origin: bottom right;
+  background-color: rgba(224, 236, 244, 0.85) !important;
 }
 
 .leaflet-control-layers svg {

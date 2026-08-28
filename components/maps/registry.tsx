@@ -9,7 +9,7 @@ export const MAP_REGISTRY: Record<string, ComponentType> = {
     ssr: false,
     loading: () => <p style={{ padding: 20 }}>Loading map assets...</p>,
   }),
-  RIBackground: dynamic(() => import("./ri-background-map"), {
+  RIAllGeosPopulation2024: dynamic(() => import("./ri-all-geos-map"), {
     ssr: false,
     loading: () => <p style={{ padding: 20 }}>Loading map assets...</p>,
   }),

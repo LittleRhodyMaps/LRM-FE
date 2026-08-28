@@ -16,12 +16,10 @@ export interface LegendOptions {
  * SVG layout).
  */
 export function createLegend(
-  map: L.Map,
   scale: (value: number) => string,
   { label, position = "bottomright", nTicks = 2, width = 200, height = 25 }: LegendOptions
 ) {
   const legend = new LeafletLegend(scale as any, { position, nTicks, width, height });
-  legend.addTo(map);
 
   const container = legend.getContainer();
   if (container) {
