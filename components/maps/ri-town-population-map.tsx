@@ -45,7 +45,7 @@ export default function RITownPopulationMap() {
       ).then(
         (layer) => { layer?.addTo(map); }
       ).catch((error) => console.error("Error loading the GeoJSON file:", error));
-      createLegend(SCALE, { label: "Population Estimate 2024" });
+      createLegend(SCALE, { label: "Population Estimate 2024" }).addTo(map);
     },
   });
 
