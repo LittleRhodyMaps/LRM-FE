@@ -8,12 +8,14 @@ type MapEntry = (typeof MAPS)[number];
 
 export default function MapView({
   map,
+  descriptionHtml,
   index,
   total,
   prevMap,
   nextMap,
 }: {
   map: MapEntry;
+  descriptionHtml: string;
   index: number;
   total: number;
   prevMap: MapEntry | null;
@@ -39,35 +41,8 @@ export default function MapView({
 
       {/* Map area */}
       <main className="w-full max-w-2xl px-6 mt-6 flex flex-col gap-5">
-        <div className="w-full aspect-[4/3] bg-zinc-100 rounded-sm border border-zinc-200 overflow-hidden">
-          {MapComponent ? (
-            <MapComponent key={map.id} />
-          ) : (
-            <div className="w-full h-full flex items-center justify-center text-zinc-400 text-sm">
-              interactive map — {map.title}
-            </div>
-          )}
-        </div>
-
-        {/* Map meta */}
-        <div>
-          <h2 className="text-xl font-semibold text-zinc-900">{map.title}</h2>
-          <p className="text-sm text-zinc-600 mt-2 leading-relaxed">
-            {map.description}
-          </p>
-          {map.sources && map.sources.length > 0 && (
-            <ul className="mt-3 space-y-1">
-              {map.sources.map((source, i) => (
-                <li key={i} className="text-xs text-zinc-400 leading-relaxed">
-                  {source}
-                </li>
-              ))}
-            </ul>
-          )}
-        </div>
-
         {/* Prev / Next */}
-        <div className="flex justify-between items-center py-4 border-t border-zinc-100">
+        <div className="flex justify-between items-center">
           {prevMap ? (
             <Link
               href={`/${prevMap.route}`}
@@ -102,6 +77,24 @@ export default function MapView({
             </span>
           )}
         </div>
+
+        <div className="w-full aspect-[4/3] bg-zinc-100 rounded-sm border border-zinc-200 overflow-hidden">
+          {MapComponent ? (
+            <MapComponent key={map.id} />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-zinc-400 text-sm">
+              interactive map — {map.title}
+            </div>
+          )}
+        </div>
+
+        {/* Map meta */}
+        {descriptionHtml && (
+          <div
+            className="prose prose-sm prose-zinc max-w-none leading-relaxed"
+            dangerouslySetInnerHTML={{ __html: descriptionHtml }}
+          />
+        )}
       </main>
     </div>
   );

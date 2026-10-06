@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@plugin "@tailwindcss/typography";
 
 :root {
   --background: #ffffff;
@@ -77,4 +78,13 @@ body {
   margin: 0 0 5px;
   color: #000000;
   font-weight: bold;
+}
+
+.prose #sources,
+.prose #sources ~ ul,
+.prose #sources ~ ol,
+.prose #sources ~ p {
+  color: var(--color-zinc-400);
+  font-size: 0.75rem;
+  line-height: 1.5;
 }
