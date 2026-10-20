@@ -11,10 +11,10 @@
   {
     "id": 2,
     "issue": 2,
-    "route": "RI-All-Geos-Pop",
-    "date": "",
-    "title": "RI Population Estimates 2024 many census geography level",
-    "descriptionFile": "RI-All-Geos-Pop.md",
+    "route": "RI-All-Geos-pop",
+    "date": "Oct 20, 2026",
+    "title": "Rhode Island Town Population Estimates 2024",
+    "descriptionFile": "RI-All-Geos-pop.md",
     "component": "RIAllGeosPopulation2024"
   }
 ]
